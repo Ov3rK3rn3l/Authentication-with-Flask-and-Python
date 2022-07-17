@@ -42,7 +42,7 @@ def register():
     if request.method == "POST":
         if User.query.filter_by(email=request.form.get('email')).first():
             # If user already exists
-            flash('User already exist into our database')
+            flash('Usuário ja existe no nosso banco de dados.')
             return redirect(url_for('login'))
 
         new_user = User(
@@ -69,11 +69,11 @@ def login():
         user = User.query.filter_by(email=email).first()
         # Email doesn't exist
         if not user:
-            flash("This email does not exist, please try again!")
+            flash("Esse email já existe, por favor tente novamente!")
             return redirect(url_for('login'))
         # Password incorrect
         elif not check_password_hash(user.password, password):
-            flash("Password incorrect, please try again")
+            flash("Senha incorreta, por favor tente novamente")
             return redirect(url_for('login'))
         # Email exists and password is correct
         else:
